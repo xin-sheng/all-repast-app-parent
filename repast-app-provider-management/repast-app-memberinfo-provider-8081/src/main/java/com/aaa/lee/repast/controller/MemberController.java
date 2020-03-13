@@ -2,14 +2,13 @@ package com.aaa.lee.repast.controller;
 
 import com.aaa.lee.repast.base.BaseService;
 import com.aaa.lee.repast.base.CommonController;
+import com.aaa.lee.repast.base.ResultData;
 import com.aaa.lee.repast.model.LoginLog;
 import com.aaa.lee.repast.model.Member;
 import com.aaa.lee.repast.service.LoginLogService;
 import com.aaa.lee.repast.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Company AAA软件教育
@@ -40,6 +39,17 @@ public class MemberController extends CommonController<Member> {
     @PostMapping("/doLogin")
     public Boolean doLogin(@RequestBody Member member) {
         return memberService.doLogin(member);
+    }
+
+    @GetMapping("/integral/{token}")
+    public ResultData integral(@PathVariable("token")String token){
+        Member member = new Member();
+        Member member1 = getBaseService().queryOne(member.setToken(token));
+        if(null != member1){
+            return super.operationSuccess(member1);
+        }else {
+            return super.operationFailed();
+        }
     }
 
 }
