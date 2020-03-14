@@ -1,5 +1,6 @@
 package com.aaa.lee.repast.base;
 
+import com.aaa.lee.repast.model.Member;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 

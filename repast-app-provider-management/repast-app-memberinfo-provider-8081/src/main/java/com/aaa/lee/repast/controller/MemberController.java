@@ -8,7 +8,9 @@ import com.aaa.lee.repast.model.Member;
 import com.aaa.lee.repast.service.LoginLogService;
 import com.aaa.lee.repast.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Company AAA软件教育
@@ -41,15 +43,9 @@ public class MemberController extends CommonController<Member> {
         return memberService.doLogin(member);
     }
 
-    @GetMapping("/integral/{token}")
-    public ResultData integral(@PathVariable("token")String token){
-        Member member = new Member();
-        Member member1 = getBaseService().queryOne(member.setToken(token));
-        if(null != member1){
-            return super.operationSuccess(member1);
-        }else {
-            return super.operationFailed();
-        }
+    @PostMapping("/selectMember")
+    public Member selectMember(@RequestBody Member openId){
+        Member member = memberService.queryOne(openId);
+        return member;
     }
-
 }

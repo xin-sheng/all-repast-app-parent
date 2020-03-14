@@ -1,12 +1,11 @@
 package com.aaa.lee.repast.fallback;
 
 import com.aaa.lee.repast.base.ResultData;
+import com.aaa.lee.repast.model.Coupon;
 import com.aaa.lee.repast.model.Member;
-import com.aaa.lee.repast.model.MemberReceiveAddress;
 import com.aaa.lee.repast.service.IRepastService;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Map;
 
@@ -35,33 +34,16 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
             }
 
             @Override
-            public ResultData SelectAllAdderss(Long memberId) {
-                System.out.println("熔断日志方法！");
+            public Member selectMember(Member openId) {
                 return null;
             }
 
             @Override
-            public ResultData integral(@PathVariable("token")String token) {
-                System.out.println("熔断日志方法！");
+            public Boolean getCoupon(Coupon coupon, Long memberId, String nickName) {
                 return null;
             }
 
-            @Override
-            public ResultData AddAdderss(MemberReceiveAddress memberReceiveAddress) {
-                System.out.println("熔断日志方法！");
-                return null;
-            }
 
-            @Override
-            public ResultData updateAdders(MemberReceiveAddress memberReceiveAddress) {
-                System.out.println("熔断日志方法！");
-                return null;
-            }
-
-            @Override
-            public ResultData delAdders(Long id) {
-                return null;
-            }
         };
         return repastService;
     }
