@@ -5,10 +5,9 @@ import com.aaa.lee.repast.fallback.RepastFallBackFactory;
 import com.aaa.lee.repast.model.Coupon;
 import com.aaa.lee.repast.model.LoginLog;
 import com.aaa.lee.repast.model.Member;
+import com.aaa.lee.repast.model.MemberReceiveAddress;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -52,22 +51,50 @@ public interface IRepastService {
     ResultData saveLog(@RequestBody Map map);
 
     /**
-     * 根据openid查询个人信息
-     *
-     * @param openId
+     * 根据用户id查收货地址
+     * @param id
      * @return
      */
-    @PostMapping("/selectMember")
-    Member selectMember(@RequestBody Member openId);
+    @RequestMapping("/adderss")
+    ResultData SelectAllAdderss(Long memberId);
+
+    /***
+     * 根据token查询积分
+     * @param token
+     * @return
+     */
+    @GetMapping("/integral/{token}")
+    ResultData integral(@PathVariable("token")String token);
+
 
     /**
-     * 优惠卷领取
-     * @param coupon
-     * @param member
+     * 新增收货地址
+     * @param memberReceiveAddress
      * @return
      */
+    @PostMapping("/addAdders")
+    ResultData AddAdderss(MemberReceiveAddress memberReceiveAddress);
+
+    /**
+     *修改收货地址
+     * @param memberReceiveAddress
+     * @return
+     */
+    @PostMapping("/updateAdders")
+    public ResultData updateAdders(MemberReceiveAddress memberReceiveAddress);
+
+    /**
+     * 根据收货地址id删除
+     * @param id
+     * @return
+     */
+    @GetMapping("/delAdders/{id}")
+    public ResultData delAdders(@PathVariable("id")Long id);
+
+
     @PostMapping("/getCoupon")
-    Boolean getCoupon(@RequestBody Coupon coupon,
-                      @RequestParam("memberId") Long memberId,
-                      @RequestParam("nickName") String nickName );
+    public Boolean getCoupon(Coupon coupon,
+                             @RequestParam("memberId") Long memberId,
+                             @RequestParam("nickName") String nickName );
 }
+

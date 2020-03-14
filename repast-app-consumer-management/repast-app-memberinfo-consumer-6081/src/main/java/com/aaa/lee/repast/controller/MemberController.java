@@ -1,6 +1,6 @@
 package com.aaa.lee.repast.controller;
 
-import com.aaa.lee.repast.annotation.LoginLogAnnotation;
+import com.aaa.lee.repast.annotation.*;
 import com.aaa.lee.repast.base.BaseController;
 import com.aaa.lee.repast.base.ResultData;
 import com.aaa.lee.repast.model.Member;
@@ -8,6 +8,8 @@ import com.aaa.lee.repast.service.IRepastService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date Create in 2020/3/10 10:13
  * @Description
  **/
-@RestController
+@RestController("/user")
 @Api(value = "用户信息", tags = "用户信息接口(提供用户所欲有关操作)")
 public class MemberController extends BaseController {
 
@@ -47,14 +49,15 @@ public class MemberController extends BaseController {
         return super.loginFailed();
     }
 
-    /**
-     * 根据openid执行查询个人信息操作
-     * @param openId
-     * @return
-     */
-    @PostMapping("/selectMember")
-    @ApiOperation(value = "查询个人信息", notes = "用户执行查看信息")
-    public Member selectMember(Member openId){
-       return repastService.selectMember(openId);
+    @TokenAnnotation
+    @GetMapping("/integral/{token}")
+    @ApiOperation(value = "积分", notes = "用户执行积分查询操作(根据token查询用户的积分)")
+    public ResultData integral(@PathVariable("token") String token){
+        return repastService.integral(token);
     }
+
+
+
+
+
 }

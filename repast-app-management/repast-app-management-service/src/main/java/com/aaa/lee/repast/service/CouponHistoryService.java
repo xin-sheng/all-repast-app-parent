@@ -20,7 +20,9 @@ public class CouponHistoryService extends BaseService<CouponHistory> {
     private CouponMapper couponMapper;
     @Autowired
     private CouponHistoryMapper couponHistoryMapper;
+
     public Boolean getCoupon(Coupon coupon, Long memberId,String nickName ){
+
         Coupon coupon1 = couponMapper.selectByPrimaryKey(coupon.getId());
         if (coupon1.getCount()!=null&&coupon1.getCount()!=0){
             CouponHistory couponHistory = new CouponHistory();
