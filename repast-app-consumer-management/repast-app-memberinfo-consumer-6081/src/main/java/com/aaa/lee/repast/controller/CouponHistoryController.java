@@ -23,6 +23,7 @@ public class CouponHistoryController extends BaseController {
     @Autowired
     private IRepastService repastService;
 
+
     @PostMapping("/getCoupon")
     @ApiOperation(value = "登录", notes = "用户执行登录操作(接收微信端传递数据)")
     public Boolean getCoupon(Coupon coupon,

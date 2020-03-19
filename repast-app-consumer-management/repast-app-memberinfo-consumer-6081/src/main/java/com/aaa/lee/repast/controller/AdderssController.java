@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("/adderss")
+@RestController("/adders")
 @Api(value = "收货地址信息", tags = "收货地址接口(提供用户收货地址信息)")
 public class AdderssController extends BaseController {
 
@@ -22,10 +22,10 @@ public class AdderssController extends BaseController {
      * @param memberId
      * @return
      */
-    @GetMapping("/adderss")
     @ApiOperation(value = "查询所有收货地址", notes = "用户执行查询所有收货地址(查询所有收货地址)")
-    public ResultData SelectAllAdderss(Long memberId){
-         return repastService.SelectAllAdderss(memberId);
+    @GetMapping("/allList")
+    public ResultData SelectAllAdders(Long memberId){
+         return repastService.SelectAllAdders(memberId);
     }
 
     /**
@@ -59,6 +59,19 @@ public class AdderssController extends BaseController {
     @ApiOperation(value = "删除收货地址", notes = "用户执行删除收货地址(删除收货地址)")
     public ResultData delAdders(@PathVariable("id") Long id){
         return repastService.delAdders(id);
+    }
+
+    /**
+     * 前台传过来一个字符串已逗号隔开   收货地址的id
+     * 还有一个用户id
+     * @param deleteMany
+     * @return
+     */
+    @ApiOperation(value = "批量删除",notes = "用户执行删除多个收货地址(删除多个收货地址)")
+    @DeleteMapping("/deleteMany")
+    public ResultData deleteMany(@PathVariable("memberId")String memberId
+            ,@PathVariable("deleteMany") String deleteMany){
+        return repastService.deleteMany(memberId,deleteMany);
     }
 
 }

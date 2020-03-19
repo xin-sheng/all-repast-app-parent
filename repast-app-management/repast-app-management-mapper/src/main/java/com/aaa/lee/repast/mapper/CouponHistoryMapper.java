@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface CouponHistoryMapper extends Mapper<CouponHistory> {
 
+    Integer xiuTwo(Integer couponId);
+
 }

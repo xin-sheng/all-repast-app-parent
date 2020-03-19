@@ -7,7 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.Table;
 import java.util.Date;
 
-
+/**
+ * 优惠券使用、领取历史表
+ */
 @Table(name = "sms_coupon_history")
 @Data
 @AllArgsConstructor

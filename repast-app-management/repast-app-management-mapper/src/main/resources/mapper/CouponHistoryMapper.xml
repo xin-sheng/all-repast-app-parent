@@ -15,4 +15,9 @@
     <result column="order_id" property="orderId" jdbcType="BIGINT" />
     <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
   </resultMap>
+
+  <!--修改优惠卷的状态为2（2表示已过期）-->
+  <update id="xiuTwo">
+    update sms_coupon_history set use_status = 2 where coupon_id = #{coupon_id}
+  </update>
 </mapper>

@@ -5,6 +5,9 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
+/**
+ *会员收货地址表
+ */
 @Table(name = "ums_member_receive_address")
 @Data
 @AllArgsConstructor

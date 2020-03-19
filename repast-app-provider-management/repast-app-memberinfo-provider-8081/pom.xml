@@ -11,5 +11,11 @@
 
     <artifactId>repast-app-memberinfo-provider-8081</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -49,15 +49,28 @@ public class MemberController extends BaseController {
         return super.loginFailed();
     }
 
-    @TokenAnnotation
-    @GetMapping("/integral/{token}")
-    @ApiOperation(value = "积分", notes = "用户执行积分查询操作(根据token查询用户的积分)")
-    public ResultData integral(@PathVariable("token") String token){
-        return repastService.integral(token);
+    @GetMapping("/integral/{openId}")
+    @ApiOperation(value = "积分", notes = "用户执行积分查询操作(根据openId查询用户的积分)")
+    public ResultData integral(@PathVariable("openId") String openId){
+        return repastService.integral(openId);
     }
 
+    @ApiOperation(value = "查询个人信息",notes = "用户执行查询自己当前积分的操作(根据用户的id来查询)")
+    @GetMapping("/personal")
+    public ResultData personal(@PathVariable("openId") String openId){
+        return repastService.personal(openId);
+    }
 
-
+    /**
+     * 根据用户id修改个人信息
+     * @param member
+     * @return
+     */
+    @ApiOperation(value = "修改个人信息",notes = "用户执行对个人信息的修改(根据用户id修改个人信息)")
+    @PostMapping("/personalUpdate")
+    public ResultData personalUpdate(Member member){
+        return repastService.personalUpdate(member);
+    }
 
 
 }

@@ -1,0 +1,42 @@
+{
+  "groups": [
+    {
+      "name": "spring.ftp",
+      "type": "com.aaa.lee.repast.properties.FtpProperties",
+      "sourceType": "com.aaa.lee.repast.properties.FtpProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "spring.ftp.base-path",
+      "type": "java.lang.String",
+      "sourceType": "com.aaa.lee.repast.properties.FtpProperties"
+    },
+    {
+      "name": "spring.ftp.http-path",
+      "type": "java.lang.String",
+      "sourceType": "com.aaa.lee.repast.properties.FtpProperties"
+    },
+    {
+      "name": "spring.ftp.ip-addr",
+      "type": "java.lang.String",
+      "sourceType": "com.aaa.lee.repast.properties.FtpProperties"
+    },
+    {
+      "name": "spring.ftp.password",
+      "type": "java.lang.String",
+      "sourceType": "com.aaa.lee.repast.properties.FtpProperties"
+    },
+    {
+      "name": "spring.ftp.port",
+      "type": "java.lang.Integer",
+      "sourceType": "com.aaa.lee.repast.properties.FtpProperties"
+    },
+    {
+      "name": "spring.ftp.username",
+      "type": "java.lang.String",
+      "sourceType": "com.aaa.lee.repast.properties.FtpProperties"
+    }
+  ],
+  "hints": []
+}

@@ -47,6 +47,15 @@ public abstract class BaseService<T> {
     }
 
     /**
+     * insertSelective插入数据，使用不为null的属性作为字段使用
+     * @param t
+     * @return
+     */
+    public Integer addService(T t){
+        return getMapper().insertSelective(t);
+    }
+
+    /**
      * @author Seven Lee
      * @description
      *      更新操作

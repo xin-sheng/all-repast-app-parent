@@ -5,6 +5,7 @@ import com.aaa.lee.repast.base.CommonController;
 import com.aaa.lee.repast.base.ResultData;
 import com.aaa.lee.repast.model.MemberReceiveAddress;
 import com.aaa.lee.repast.service.AdderssService;
+import org.apache.commons.beanutils.ConvertUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +25,11 @@ public class AdderssController extends CommonController {
 
     /**
      *  根据用户id查询数据的所有收货地址
-     * @param id
+     * @param memberId
      * @return
      */
-    @RequestMapping("/adderss")
-    public ResultData SelectAllAdderss(Long memberId){
+    @GetMapping("/allList")
+    public ResultData SelectAllAdders(Long memberId){
         List list = getBaseService().queryList(memberId);
         if(list.size() > 0){
             return super.operationSuccess(list);
@@ -76,6 +77,18 @@ public class AdderssController extends CommonController {
     public ResultData delAdders(@PathVariable("id")Long id){
         Integer delete = getBaseService().delete(id);
         if(delete > 0){
+            return super.operationSuccess();
+        }else {
+            return super.operationFailed();
+        }
+    }
+
+    @DeleteMapping("/deleteMany")
+    public ResultData deleteMany(@PathVariable("memberId")String memberId
+            ,@PathVariable("deleteMany") String deleteMany){
+        Integer integer = getBaseService().deleteBatch((Integer[]) ConvertUtils.convert(deleteMany.split(","),
+                Integer.class));
+        if(integer > 0){
             return super.operationSuccess();
         }else {
             return super.operationFailed();

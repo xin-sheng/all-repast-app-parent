@@ -69,6 +69,21 @@ public abstract class CommonController<T> extends BaseController {
     }
 
     /**
+     * 使用不为null的字段作为属性使用
+     * @param map
+     * @return
+     */
+    public ResultData batchAdd(@RequestBody Map map){
+        T t = getBaseService().newInstance(map);
+        Integer integer = getBaseService().addService((T) map);
+        if(integer > 0) {
+            afterAdd(map);
+            return super.operationSuccess();
+        }
+        return super.operationFailed();
+    }
+
+    /**
      * @author Seven Lee
      * @description
      *      删除操作

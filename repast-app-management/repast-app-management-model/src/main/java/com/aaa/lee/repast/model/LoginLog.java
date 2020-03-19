@@ -5,6 +5,9 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
+/**
+ *会员登录记录
+ */
 @Table(name = "ums_member_login_log")
 @Data
 @AllArgsConstructor

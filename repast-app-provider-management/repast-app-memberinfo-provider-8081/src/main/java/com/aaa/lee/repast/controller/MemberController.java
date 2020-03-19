@@ -41,12 +41,47 @@ public class MemberController extends CommonController<Member> {
         return memberService.doLogin(member);
     }
 
-    @GetMapping("/integral/{token}")
-    public ResultData integral(@PathVariable("token")String token){
-        Member member = new Member();
-        Member member1 = getBaseService().queryOne(member.setToken(token));
-        if(null != member1){
-            return super.operationSuccess(member1);
+
+    /**
+     * 根据用户id查询用户当前积分操作
+     * @param openId
+     * @return
+     */
+    @GetMapping("/integral/{openId}")
+    public ResultData integral(@PathVariable("openId")String openId){
+        Member member = getBaseService().queryOne(new Member().setOpenId(openId));
+        if(null != member){
+            return super.operationSuccess(member);
+        }else {
+            return super.operationFailed();
+        }
+    }
+
+    /**
+     * 根据openid查询用户信息
+     * @param openId
+     * @return
+     */
+    @GetMapping("/personal")
+    public ResultData personal(@PathVariable("openId") String openId){
+        Member member = getBaseService().queryOne(new Member().setOpenId(openId));
+        if(null != member){
+            return super.operationSuccess(member);
+        }else {
+            return super.operationFailed();
+        }
+    }
+
+    /**
+     * 根据用户id修改个人信息
+     * @param member
+     * @return
+     */
+    @PostMapping("/personalUpdate")
+    public ResultData personalUpdate(Member member){
+        Integer update = getBaseService().update(member);
+        if(update > 0){
+            return super.operationSuccess();
         }else {
             return super.operationFailed();
         }

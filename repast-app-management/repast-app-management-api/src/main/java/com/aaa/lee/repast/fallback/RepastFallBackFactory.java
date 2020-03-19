@@ -8,6 +8,7 @@ import com.aaa.lee.repast.service.IRepastService;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
@@ -31,33 +32,31 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
 
             @Override
             public ResultData saveLog(Map map) {
-                System.out.println("熔断日志方法！");
                 return null;
             }
 
             @Override
-            public ResultData SelectAllAdderss(Long memberId) {
-                System.out.println("熔断日志方法！");
+            public ResultData integral(String openId) {
                 return null;
             }
 
             @Override
-            public ResultData integral(@PathVariable("token")String token) {
-                System.out.println("熔断日志方法！");
+            public ResultData personal(String openId) {
                 return null;
             }
 
-
+            @Override
+            public ResultData SelectAllAdders(Long memberId) {
+                return null;
+            }
 
             @Override
             public ResultData AddAdderss(MemberReceiveAddress memberReceiveAddress) {
-                System.out.println("熔断日志方法！");
                 return null;
             }
 
             @Override
             public ResultData updateAdders(MemberReceiveAddress memberReceiveAddress) {
-                System.out.println("熔断日志方法！");
                 return null;
             }
 
@@ -67,9 +66,25 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
             }
 
             @Override
+            public ResultData deleteMany(String memberId, String deleteMany) {
+                return null;
+            }
+
+            @Override
+            public ResultData personalUpdate(Member member) {
+                return null;
+            }
+
+            @Override
+            public Boolean uploadFile(MultipartFile file, String token) {
+                return null;
+            }
+
+            @Override
             public Boolean getCoupon(Coupon coupon, Long memberId, String nickName) {
                 return null;
             }
+
         };
         return repastService;
     }

@@ -8,6 +8,7 @@ import com.aaa.lee.repast.model.Member;
 import com.aaa.lee.repast.model.MemberReceiveAddress;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
@@ -50,21 +51,30 @@ public interface IRepastService {
     @PostMapping("/add")
     ResultData saveLog(@RequestBody Map map);
 
+
+    /***
+     * 根据用户id查询积分
+     * @param openId
+     * @return
+     */
+    @GetMapping("/integral/{openId}")
+    ResultData integral(@PathVariable("openId")String openId);
+
+    /**
+     * 根据用户id查询个人信息
+     * @param openId
+     * @return
+     */
+    @GetMapping("/personal")
+    public ResultData personal(@PathVariable("openId") String openId);
+
     /**
      * 根据用户id查收货地址
      * @param id
      * @return
      */
-    @RequestMapping("/adderss")
-    ResultData SelectAllAdderss(Long memberId);
-
-    /***
-     * 根据token查询积分
-     * @param token
-     * @return
-     */
-    @GetMapping("/integral/{token}")
-    ResultData integral(@PathVariable("token")String token);
+    @GetMapping("/allList")
+    public ResultData SelectAllAdders(Long memberId);
 
 
     /**
@@ -91,6 +101,32 @@ public interface IRepastService {
     @GetMapping("/delAdders/{id}")
     public ResultData delAdders(@PathVariable("id")Long id);
 
+    /**
+     * 批量删除收货地址
+     * @param memberId
+     * @param deleteMany
+     * @return
+     */
+    @DeleteMapping("/deleteMany")
+    public ResultData deleteMany(@PathVariable("memberId")String memberId
+            ,@PathVariable("deleteMany") String deleteMany);
+
+    /**
+     * 根据用户id修改个人信息
+     * @param member
+     * @return
+     */
+    @PostMapping("/personalUpdate")
+    public ResultData personalUpdate(Member member);
+
+    /**
+     * 上传图片到ftp
+     * @param file
+     * @param token
+     * @return
+     */
+    @PostMapping("/upload")
+    public Boolean uploadFile(MultipartFile file, String token);
 
     @PostMapping("/getCoupon")
     public Boolean getCoupon(Coupon coupon,
